@@ -1,9 +1,7 @@
 package stockflow.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import stockflow.entities.Product;
 import stockflow.services.ProductService;
 
@@ -27,5 +25,12 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product findById(@PathVariable("id") Long id) {
         return service.findById(id);
+    }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product insert(@RequestBody Product product) {
+        return service.insert(product);
     }
 }

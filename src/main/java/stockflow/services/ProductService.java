@@ -24,4 +24,8 @@ public class ProductService {
         return repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
     }
+
+    public Product insert(Product product) {
+        return repository.save(product);
+    }
 }
