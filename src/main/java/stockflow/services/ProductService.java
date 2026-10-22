@@ -2,6 +2,7 @@ package stockflow.services;
 
 import org.springframework.stereotype.Service;
 import stockflow.entities.Product;
+import stockflow.exceptions.ProductNotFoundException;
 import stockflow.repositories.ProductRepository;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Optional<Product> findById(Long id) {
-        return repository.findById(id);
+    public Product findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 }
