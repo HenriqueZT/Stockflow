@@ -6,7 +6,6 @@ import stockflow.exceptions.ProductNotFoundException;
 import stockflow.repositories.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
