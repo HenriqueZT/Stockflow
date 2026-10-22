@@ -1,7 +1,9 @@
 package stockflow.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import stockflow.dto.ProductCreateDTO;
 import stockflow.entities.Product;
 import stockflow.services.ProductService;
 
@@ -30,7 +32,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product insert(@RequestBody Product product) {
-        return service.insert(product);
+    public Product insert(@Valid @RequestBody ProductCreateDTO dto) {
+        return service.insert(dto);
     }
 }
