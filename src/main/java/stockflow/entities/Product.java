@@ -17,6 +17,7 @@ public class Product {
     private String sku;
     private BigDecimal price;
     private Integer quantity;
+    private boolean active = true;
 
     public Product() {
     }
@@ -65,6 +66,10 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -76,5 +81,9 @@ public class Product {
     @Override
     public int hashCode() {
         return Product.class.hashCode();
+    }
+
+    public void deactivate() {
+        active = false;
     }
 }

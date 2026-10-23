@@ -41,4 +41,10 @@ public class ProductController {
     public Product update(@PathVariable("id") Long id, @Valid @RequestBody ProductUpdateDTO dto) {
         return service.update(id, dto);
     }
+
+    @PatchMapping("/{id}/deactivate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactivate(@PathVariable("id") Long id) {
+        service.deactivate(id);
+    }
 }

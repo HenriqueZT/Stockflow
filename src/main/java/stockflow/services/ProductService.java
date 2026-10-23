@@ -56,4 +56,11 @@ public class ProductService {
 
         return repository.save(product);
     }
+
+    public void deactivate (Long id) {
+        Product product = findById(id);
+        product.deactivate();
+
+        repository.save(product);
+    }
 }
