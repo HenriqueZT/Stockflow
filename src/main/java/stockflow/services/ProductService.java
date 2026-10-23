@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import stockflow.dto.ProductCreateDTO;
 import stockflow.dto.ProductUpdateDTO;
 import stockflow.entities.Product;
+import stockflow.exceptions.DuplicateSkuException;
 import stockflow.exceptions.ProductNotFoundException;
 import stockflow.repositories.ProductRepository;
 
@@ -28,6 +29,10 @@ public class ProductService {
     }
 
     public Product insert(ProductCreateDTO dto) {
+
+        if(repository.existsBySku(dto.getSku())) {
+            throw new DuplicateSkuException(dto.getSku());
+        }
         Product product = new Product(
                 null,
                 dto.getName(),
@@ -40,6 +45,11 @@ public class ProductService {
 
     public Product update(Long id, ProductUpdateDTO dto) {
         Product product = findById(id);
+
+        if(repository.existsBySkuAndIdNot(dto.getSku(), id)) {
+            throw new DuplicateSkuException(dto.getSku());
+        }
+
         product.setName(dto.getName());
         product.setSku(dto.getSku());
         product.setPrice(dto.getPrice());
