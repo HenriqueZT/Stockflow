@@ -19,8 +19,11 @@ public class ProductService {
         this.repository = repository;
     }
 
-    public List<Product> findAll() {
-        return repository.findAll();
+    public List<Product> findAll(Boolean active) {
+        if(active == null) {
+            return repository.findAll();
+        }
+        return repository.findByActive(active);
     }
 
     public Product findById(Long id) {

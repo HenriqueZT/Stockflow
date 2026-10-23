@@ -21,15 +21,14 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> findAll() {
-        return service.findAll();
+    public List<Product> findAll(@RequestParam(name = "active", required = false) Boolean active) {
+        return service.findAll(active);
     }
 
     @GetMapping("/{id}")
     public Product findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
