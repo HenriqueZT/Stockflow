@@ -2,6 +2,7 @@ package stockflow.services;
 
 import org.springframework.stereotype.Service;
 import stockflow.dto.ProductCreateDTO;
+import stockflow.dto.ProductUpdateDTO;
 import stockflow.entities.Product;
 import stockflow.exceptions.ProductNotFoundException;
 import stockflow.repositories.ProductRepository;
@@ -34,6 +35,15 @@ public class ProductService {
                 dto.getPrice(),
                 dto.getQuantity()
         );
+        return repository.save(product);
+    }
+
+    public Product update(Long id, ProductUpdateDTO dto) {
+        Product product = findById(id);
+        product.setName(dto.getName());
+        product.setSku(dto.getSku());
+        product.setPrice(dto.getPrice());
+
         return repository.save(product);
     }
 }
