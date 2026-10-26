@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class ProductCreateDTO {
 
-    @NotBlank(message = "O nome é obrigatório")
+    @NotBlank
     private String name;
     @NotBlank(message = "O SKU é obrigatório")
     private String sku;

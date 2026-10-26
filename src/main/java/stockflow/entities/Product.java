@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 import jakarta.persistence.*;
+import stockflow.exceptions.InsufficientStockException;
 
 @Entity
 @Table(name = "tb_product")
@@ -85,5 +86,24 @@ public class Product {
 
     public void deactivate() {
         active = false;
+    }
+
+    public void addStock (Integer quantity) {
+        if(quantity == null || quantity <= 0) {
+            throw new IllegalArgumentException("A quantidade deve ser maior que zero");
+        }
+        this.quantity += quantity;
+    }
+
+    public void removeStock (Integer quantity) {
+        if(quantity == null || quantity <= 0) {
+            throw new IllegalArgumentException("A quantidade deve ser maior que zero");
+        }
+        if(quantity > this.quantity) {
+            throw new InsufficientStockException();
+        }
+        else {
+            this.quantity -= quantity;
+        }
     }
 }
